@@ -57,4 +57,4 @@ export const searchApiJobs = (query) => {
 };
 
 
-https://www.themuse.com/api/public/jobs?company=${query}&category=Software%20Engineering&page=1
+//https://www.themuse.com/api/public/jobs?company=${query}&category=Software%20Engineering&page=1
