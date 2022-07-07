@@ -1,24 +1,26 @@
-import React from 'react';
-import { Jumbotron, Container, CardColumns, Card, Button } from 'react-bootstrap';
+import React from "react";
+import {
+  Jumbotron,
+  Container,
+  CardColumns,
+  Card,
+  Button,
+} from "react-bootstrap";
 
-import Auth from '../utils/auth';
-import { removeBookId } from '../utils/localStorage';
+import Auth from "../utils/auth";
+import { removeJobId } from "../utils/localStorage";
 
-import { useQuery, useMutation } from '@apollo/client';
-import { GET_ME } from '../utils/queries';
-import { REMOVE_BOOK } from '../utils/mutations';
+import { useQuery, useMutation } from "@apollo/client";
+import { GET_ME } from "../utils/queries";
+import { REMOVE_JOB } from "../utils/mutations";
 
-const SavedBooks = () => {
-
+const SavedJobs = () => {
   const { loading, data } = useQuery(GET_ME);
-  const [removeBook] = useMutation(REMOVE_BOOK);
+  const [removeJob] = useMutation(REMOVE_JOB);
   const userData = data?.me || [];
 
-  
-  
-
-  // create function that accepts the book's mongo _id value as param and deletes the book from the database
-  const handleDeleteBook = async (bookId) => {
+  // create function that accepts the job's mongo _id value as param and deletes the job from the database
+  const handleDeleteJob = async (jobId) => {
     const token = Auth.loggedIn() ? Auth.getToken() : null;
 
     if (!token) {
@@ -26,10 +28,10 @@ const SavedBooks = () => {
     }
 
     try {
-      const { data } = await removeBook({
-        variables: {bookId},
+      const { data } = await removeJob({
+        variables: { jobId },
       });
-      removeBookId(bookId);
+      removeJobId(jobId);
     } catch (err) {
       console.error(err);
     }
@@ -42,28 +44,39 @@ const SavedBooks = () => {
 
   return (
     <>
-      <Jumbotron fluid className='text-light bg-dark'>
+      <Jumbotron fluid className="text-light bg-dark">
         <Container>
-          <h1>Viewing saved books!</h1>
+          <h1>Viewing saved jobs!</h1>
         </Container>
       </Jumbotron>
       <Container>
         <h2>
-          {userData.savedBooks.length
-            ? `Viewing ${userData.savedBooks.length} saved ${userData.savedBooks.length === 1 ? 'book' : 'books'}:`
-            : 'You have no saved books!'}
+          {userData.savedJobs.length
+            ? `Viewing ${userData.savedJobs.length} saved ${
+                userData.savedJobs.length === 1 ? "job" : "jobs"
+              }:`
+            : "You have no saved jobs!"}
         </h2>
         <CardColumns>
-          {userData.savedBooks.map((book) => {
+          {userData.savedJobs.map((job) => {
             return (
-              <Card key={book.bookId} border='dark'>
-                {book.image ? <Card.Img src={book.image} alt={`The cover for ${book.title}`} variant='top' /> : null}
-                <Card.Body>
-                  <Card.Title>{book.title}</Card.Title>
-                  <p className='small'>Authors: {book.authors}</p>
-                  <Card.Text>{book.description}</Card.Text>
-                  <Button className='btn-block btn-danger' onClick={() => handleDeleteBook(book.bookId)}>
-                    Delete this Book!
+              <Card key={job.jobId} border="dark">
+                {/* {job.image ? (
+                  <Card.Img
+                    src={job.image}
+                    alt={`The cover for ${job.title}`}
+                    variant="top"
+                  />
+                ) : null} */}
+                  <Card.Body>
+                  <Card.Title>{job.company}</Card.Title>
+                  <p className="small">Title: {job.Title}</p>
+                  <Card.Text>{job.level}</Card.Text>
+                  <Button
+                    className="btn-block btn-danger"
+                    onClick={() => handleDeleteJob(job.jobId)}
+                  >
+                    Delete this Job!
                   </Button>
                 </Card.Body>
               </Card>
@@ -75,4 +88,4 @@ const SavedBooks = () => {
   );
 };
 
-export default SavedBooks;
+export default SavedJobs;
