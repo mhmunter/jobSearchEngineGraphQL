@@ -50,8 +50,7 @@ export const deleteJob = (jobId, token) => {
   });
 };
 
-// make a search to google jobs api
-// https://www.googleapis.com/jobs/v1/volumes?q=harry+potter
+
 export const searchApiJobs = (query) => {
   return fetch(`https://www.themuse.com/api/public/jobs?company=${query}&category=Software%20Engineering&page=1`);
 };

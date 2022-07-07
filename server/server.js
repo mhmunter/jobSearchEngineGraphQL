@@ -5,7 +5,7 @@ const routes = require('./routes');
 const dotenv = require(“dotenv”).config()  
 
 const app = express();
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT;
 const GOOGLE_API_KEY=process.env.GOOGLE_API_KEY
 
 app.use(express.urlencoded({ extended: true }));
