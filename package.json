@@ -16,8 +16,12 @@
     "concurrently": "^5.1.0"
   },
   "dependencies": {
+    "@emotion/react": "^11.9.3",
+    "@emotion/styled": "^11.9.3",
+    "@mui/material": "^5.8.7",
     "ansi-regex": "^4.1.0",
     "ansi-styles": "^3.2.1",
+    "antd": "^4.21.5",
     "camelcase": "^5.3.1",
     "chalk": "^2.4.2",
     "cliui": "^5.0.0",
@@ -34,8 +38,8 @@
     "hosted-git-info": "^2.8.9",
     "is-arrayish": "^0.2.1",
     "is-fullwidth-code-point": "^2.0.0",
-    "locate-path": "^3.0.0",
     "json-parse-better-errors": "^1.0.2",
+    "locate-path": "^3.0.0",
     "lodash": "^4.17.21",
     "normalize-package-data": "^2.5.0",
     "p-limit": "^2.3.0",
