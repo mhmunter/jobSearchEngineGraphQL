@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Jumbotron, Container, Col, Form, Button, Card, CardColumns } from 'react-bootstrap';
 
 import Auth from '../utils/auth';
-import { saveBook, searchGoogleBooks } from '../utils/API';
+import { saveBook, searchApiJobs } from '../utils/API';
 import { saveBookIds, getSavedBookIds } from '../utils/localStorage';
 
 const SearchBooks = () => {
@@ -29,20 +29,21 @@ const SearchBooks = () => {
     }
 
     try {
-      const response = await searchGoogleBooks(searchInput);
+      const response = await searchApiJobs(searchInput);
 
       if (!response.ok) {
         throw new Error('something went wrong!');
       }
 
-      const { items } = await response.json();
+      const { results } = await response.json();
 
-      const bookData = items.map((book) => ({
-        bookId: book.id,
-        authors: book.volumeInfo.authors || ['No author to display'],
-        title: book.volumeInfo.title,
-        description: book.volumeInfo.description,
-        image: book.volumeInfo.imageLinks?.thumbnail || '',
+      const bookData = results.map((job) => ({
+        jobId: job.id || [''],
+        name: job.name || [''],
+        company: job.company.name || ['No job to display'],
+        catagory: job.categories.name || [''],
+        level: job.levels.name || [''],
+        location: job.locations.name || [''],
       }));
 
       setSearchedBooks(bookData);

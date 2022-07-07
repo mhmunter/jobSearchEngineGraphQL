@@ -1,5 +1,5 @@
 {
-  "name": "fates",
+  "name": "y",
   "version": "1.0.0",
   "description": "",
   "main": "server/server.js",
@@ -10,8 +10,8 @@
     "build": "cd client && npm run build"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "y",
+  "license": "UNLICENSED",
   "devDependencies": {
     "concurrently": "^5.1.0"
   },

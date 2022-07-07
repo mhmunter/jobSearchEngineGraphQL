@@ -52,6 +52,9 @@ export const deleteBook = (bookId, token) => {
 
 // make a search to google books api
 // https://www.googleapis.com/books/v1/volumes?q=harry+potter
-export const searchGoogleBooks = (query) => {
+export const searchApiJobs = (query) => {
   return fetch(`https://www.googleapis.com/books/v1/volumes?q=${query}`);
 };
+
+
+//https://www.themuse.com/api/public/jobs?company=${query}&category=Software%20Engineering&page=1
