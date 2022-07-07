@@ -71,10 +71,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/SipG789/muses.git"
+    "url": "git+https://github.com/mhmunter/fates.git"
   },
   "bugs": {
-    "url": "https://github.com/SipG789/muses/issues"
+    "url": "https://github.com/mhmunter/fates/issues"
   },
-  "homepage": "https://github.com/SipG789/muses#readme"
+  "homepage": "https://github.com/mhmunter/fates#readme"
 }
