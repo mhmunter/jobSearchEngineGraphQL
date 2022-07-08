@@ -45,12 +45,12 @@ const SearchJobs = () => {
       const {results} = await response.json();
       console.log(results);
       const jobData = results.map((job) => ({
-        jobId: job.id || [''],
-        name: job.name || [''],
-        company: job.company.name || ['No job to display'],
-        catagory: job.categories.name || [''],
-        level: job.levels.name || [''],
-        location: job.locations.name || [''],
+        jobId: job.id || ["No job to display"],
+        name: job.name || ["No job to display"],
+        company: job.company.name || ["No job to display"],
+        catagory: job.categories.name || ["No job to display"],
+        level: job.levels.name || ["No job to display"],
+        location: job.locations.name || ["No job to display"],
       }));
 
       setSearchedJobs(jobData);

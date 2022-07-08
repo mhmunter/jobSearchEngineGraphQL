@@ -24,29 +24,6 @@ const jobSchema = new Schema({
   },
 });
 
-// {
-//   type: String,
-// },
-// ],
-// description: {
-//   type: String,
-//   required: true,
-// },
-// // saved job id from GoogleJobs
-// jobId: {
-//   type: String,
-//   required: true,
-// },
-// image: {
-//   type: String,
-// },
-// link: {
-//   type: String,
-// },
-// title: {
-//   type: String,
-//   required: true,
-// },
 const Job = model("Job", jobSchema);
 
 module.exports = Job;
