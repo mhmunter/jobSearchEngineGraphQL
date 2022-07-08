@@ -4,10 +4,11 @@ import {
   Container,
   Col,
   Form,
-  Button,
+  // Button,
   Card,
   CardColumns,
 } from 'react-bootstrap';
+import { Button } from '@material-ui/core';
 
 import Auth from '../utils/auth';
 import { saveJob, searchApiJobs } from '../utils/API';
@@ -104,7 +105,7 @@ const SearchJobs = () => {
                 />
               </Col>
               <Col xs={12} md={4}>
-                <Button type="submit" variant="success" size="lg">
+                <Button color="primary" type="submit" variant="success" size="lg">
                   Submit Search
                 </Button>
               </Col>
