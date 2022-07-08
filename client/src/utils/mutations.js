@@ -19,9 +19,9 @@ export const ADD_USER = gql`
         _id
         username
         email
-        bookCount
-        savedBooks {
-          bookId
+        jobCount
+        savedJobs {
+          jobId
           image
           link
           title
@@ -34,15 +34,15 @@ export const ADD_USER = gql`
   }
 `;
 
-export const SAVE_BOOK = gql`
-  mutation saveBook($input: savedBook!) {
-    saveBook(input: $input) {
+export const SAVE_JOB = gql`
+  mutation saveJob($input: savedJob!) {
+    saveJob(input: $input) {
       _id
       username
       email
-      bookCount
-      savedBooks {
-        bookId
+      jobCount
+      savedJobs {
+        jobId
         description
         title
         image
@@ -53,14 +53,14 @@ export const SAVE_BOOK = gql`
   }
 `;
 
-export const REMOVE_BOOK = gql`
-  mutation removeBook($bookId: ID!) {
-    removeBook(bookId: $bookId) {
+export const REMOVE_JOB = gql`
+  mutation removeJob($jobId: ID!) {
+    removeJob(jobId: $jobId) {
       _id
       username
       email
-      savedBooks {
-        bookId
+      savedJobs {
+        jobId
         authors
         description
         title
