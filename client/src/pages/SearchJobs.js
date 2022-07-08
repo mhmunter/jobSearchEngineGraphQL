@@ -7,21 +7,20 @@ import {
   Button,
   Card,
   CardColumns,
-} from "react-bootstrap";
+} from 'react-bootstrap';
 
-import Auth from "../utils/auth";
-import { saveJob, searchApiJobs } from "../utils/API";
-import { saveJobIds, getSavedJobIds } from "../utils/localStorage";
-
+import Auth from '../utils/auth';
+import { saveJob, searchApiJobs } from '../utils/API';
+import { saveJobIds, getSavedJobIds } from '../utils/localStorage';
 const SearchJobs = () => {
   // create state for holding returned google api data
   const [searchedJobs, setSearchedJobs] = useState([]);
   // create state for holding our search field data
-  const [searchInput, setSearchInput] = useState("");
-
+  const [searchInput, setSearchInput] = useState('');
+  
   // create state to hold saved jobId values
   const [savedJobIds, setSavedJobIds] = useState(getSavedJobIds());
-
+  
   // set up useEffect hook to save `savedJobIds` list to localStorage on component unmount
   // learn more here: https://reactjs.org/docs/hooks-effect.html#effects-with-cleanup
   useEffect(() => {
@@ -38,24 +37,24 @@ const SearchJobs = () => {
 
     try {
       const response = await searchApiJobs(searchInput);
-
+      console.log(response);
       if (!response.ok) {
-        throw new Error("something went wrong!");
+        throw new Error('something went wrong!');
       }
 
-      const { results } = await response.json();
-
+      const {results} = await response.json();
+      console.log(results);
       const jobData = results.map((job) => ({
-        jobId: job.id || [""],
-        name: job.name || [""],
-        company: job.company.name || ["No job to display"],
-        catagory: job.categories.name || [""],
-        level: job.levels.name || [""],
-        location: job.locations.name || [""],
+        jobId: job.id || [''],
+        name: job.name || [''],
+        company: job.company.name || ['No job to display'],
+        catagory: job.categories.name || [''],
+        level: job.levels.name || [''],
+        location: job.locations.name || [''],
       }));
 
       setSearchedJobs(jobData);
-      setSearchInput("");
+      setSearchInput('');
     } catch (err) {
       console.error(err);
     }
@@ -77,7 +76,7 @@ const SearchJobs = () => {
       const response = await saveJob(jobToSave, token);
 
       if (!response.ok) {
-        throw new Error("something went wrong!");
+        throw new Error('something went wrong!');
       }
 
       // if job successfully saves to user's account, save job id to state
@@ -118,7 +117,7 @@ const SearchJobs = () => {
         <h2>
           {searchedJobs.length
             ? `Viewing ${searchedJobs.length} results:`
-            : "Search for a job to begin"}
+            : 'Search for a job to begin'}
         </h2>
         <CardColumns>
           {searchedJobs.map((job) => {
@@ -146,8 +145,8 @@ const SearchJobs = () => {
                       {savedJobIds?.some(
                         (savedJobId) => savedJobId === job.jobId
                       )
-                        ? "This job has already been saved!"
-                        : "Save this Job!"}
+                        ? 'This job has already been saved!'
+                        : 'Save this Job!'}
                     </Button>
                   )}
                 </Card.Body>
