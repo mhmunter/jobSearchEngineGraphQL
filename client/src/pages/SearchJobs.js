@@ -135,6 +135,7 @@ const SearchJobs = () => {
                   <Card.Title>{job.company}</Card.Title>
                   <p className="small">Title: {job.name}</p>
                   <Card.Text>{job.level}</Card.Text>
+                  <Card.Text>{job.location}</Card.Text>
                   {Auth.loggedIn() && (
                     <Button
                       disabled={savedJobIds?.some(
