@@ -12,6 +12,7 @@ import {
 import Auth from "../utils/auth";
 import { saveJob, searchApiJobs } from "../utils/API";
 import { saveJobIds, getSavedJobIds } from "../utils/localStorage";
+import { Link } from 'react-router-dom';
 
 const SearchJobs = () => {
   // create state for holding returned google api data
@@ -52,6 +53,7 @@ const SearchJobs = () => {
         catagory: job.categories[0].name || ["No job to display"],
         level: job.levels[0].name || ["No job to display"],
         location: job.locations[0].name || ["No job to display"],
+        link: job.refs.landing_page || ["No job to display"],
       }));
 
       setSearchedJobs(jobData);
@@ -136,6 +138,10 @@ const SearchJobs = () => {
                   <p className="small">Title: {job.name}</p>
                   <Card.Text>{job.level}</Card.Text>
                   <Card.Text>{job.location}</Card.Text>
+                 <Link to={ job.link }>
+                 <Card.Text>Job Link</Card.Text>
+                  </Link> 
+                
                   {Auth.loggedIn() && (
                     <Button
                       disabled={savedJobIds?.some(

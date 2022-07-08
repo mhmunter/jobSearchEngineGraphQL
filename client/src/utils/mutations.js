@@ -28,6 +28,7 @@ export const ADD_USER = gql`
          catagory
          level
          location
+         link
         }
       }
     }
@@ -48,6 +49,7 @@ export const SAVE_JOB = gql`
         catagory
         level
         locations
+        link
       }
     }
   }
@@ -66,6 +68,7 @@ export const REMOVE_JOB = gql`
         catagory
         level
         location
+        link
       }
     }
   }
