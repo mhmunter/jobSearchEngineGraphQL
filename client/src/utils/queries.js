@@ -9,11 +9,11 @@ export const GET_ME = gql`
       jobCount
       savedJobs {
         jobId
-        description
-        title
-        image
-        link
-        authors
+         name
+         company
+         catagory
+         level
+         location
       }
     }
   }
