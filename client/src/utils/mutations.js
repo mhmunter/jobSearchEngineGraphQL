@@ -25,7 +25,7 @@ export const ADD_USER = gql`
           jobId
          name
          company
-         catagory
+         category
          level
          location
          link

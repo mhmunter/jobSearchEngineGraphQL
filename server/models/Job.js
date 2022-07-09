@@ -22,6 +22,10 @@ const jobSchema = new Schema({
     type: String,
     required: true,
   },
+  link: {
+    type: String,
+    required: true,
+  },
 });
 
 const Job = model("Job", jobSchema);

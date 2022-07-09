@@ -126,7 +126,7 @@ const SearchJobs = () => {
                 />
               </Col>
               <Col xs={12} md={4}>
-                <Button color="secondary" type="submit" variant="success" size="lg">
+                <Button  type="submit" variant="contained" color="primary">
                   Submit Search
                 </Button>
               </Col>
