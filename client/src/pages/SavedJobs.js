@@ -13,6 +13,8 @@ import { removeJobId } from "../utils/localStorage";
 import { useQuery, useMutation } from "@apollo/client";
 import { GET_ME } from "../utils/queries";
 import { REMOVE_JOB } from "../utils/mutations";
+import { Link } from 'react-router-dom';
+
 
 const SavedJobs = () => {
   const { loading, data } = useQuery(GET_ME);
