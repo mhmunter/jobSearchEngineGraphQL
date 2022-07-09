@@ -52,7 +52,7 @@ export const deleteJob = (jobId, token) => {
 
 
 export const searchApiJobs = (query) => {
-  return fetch(`https://www.themuse.com/api/public/jobs?company=${query}&category=Software%20Engineering&page=1`);
+  return fetch(`https://www.themuse.com/api/public/jobs?company=${query}&category=Computer%20and%20IT&category=Data%20Science&category=Design%20and%20UX&category=IT&category=Software%20Engineer&category=Software%20Engineering&category=UX&page=1`);
 };
 
 

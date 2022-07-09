@@ -25,6 +25,8 @@ import { Typography, Button } from '@material-ui/core'
 //   }
 // })
 
+import { Link } from 'react-router-dom';
+
 // const classes = useStyles()
 
 import Auth from '../utils/auth';
@@ -66,9 +68,10 @@ const SearchJobs = () => {
         jobId: job.id || ["No job to display"],
         name: job.name || ["No job to display"],
         company: job.company.name || ["No job to display"],
-        catagory: job.categories.name || ["No job to display"],
-        level: job.levels.name || ["No job to display"],
-        location: job.locations.name || ["No job to display"],
+        catagory: job.categories[0].name || ["No job to display"],
+        level: job.levels[0].name || ["No job to display"],
+        location: job.locations[0].name || ["No job to display"],
+        link: job.refs.landing_page || ["No job to display"],
       }));
 
       setSearchedJobs(jobData);
@@ -152,8 +155,12 @@ const SearchJobs = () => {
                 ) : null} */}
                 <Card.Body>
                   <Card.Title>{job.company}</Card.Title>
-                  <p className="small">Title: {job.Title}</p>
+                  <p className="small">Title: {job.name}</p>
                   <Card.Text>{job.level}</Card.Text>
+                  <Card.Text>{job.location}</Card.Text>
+                 <Card.Text><Link to={{ pathname: `${job.link}` }} target="_blank" >job link</Link></Card.Text>
+                 
+                
                   {Auth.loggedIn() && (
                     <Button
                       disabled={savedJobIds?.some(
