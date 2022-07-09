@@ -138,9 +138,8 @@ const SearchJobs = () => {
                   <p className="small">Title: {job.name}</p>
                   <Card.Text>{job.level}</Card.Text>
                   <Card.Text>{job.location}</Card.Text>
-                 <Link to={ job.link }>
-                 <Card.Text>Job Link</Card.Text>
-                  </Link> 
+                 <Card.Text><Link to={{ pathname: `${job.link}` }} target="_blank" >job link</Link></Card.Text>
+                 
                 
                   {Auth.loggedIn() && (
                     <Button
