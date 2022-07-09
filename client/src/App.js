@@ -10,6 +10,15 @@ import {
   createHttpLink,
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
+// import { createMuiTheme, ThemeProvider } from '@material-ui/core'
+// import { purple } from '@material-ui/core/colors'
+
+// const theme = createMuiTheme({
+//   palette: {
+//     main:'#fefefe'
+//   },
+//   secondary: purple
+// })
 
 const httpLink = createHttpLink({
   uri: "/graphql",
@@ -32,6 +41,7 @@ const client = new ApolloClient({
 
 function App() {
   return (
+    // <ThemeProvider theme={theme}>
     <ApolloProvider client={client}>
       <Router>
         <>
@@ -44,6 +54,7 @@ function App() {
         </>
       </Router>
     </ApolloProvider>
+    // </ThemeProvider>
   );
 }
 

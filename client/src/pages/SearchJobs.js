@@ -8,7 +8,24 @@ import {
   Card,
   CardColumns,
 } from 'react-bootstrap';
-import { Button } from '@material-ui/core';
+import { Typography, Button } from '@material-ui/core'
+// import { makeStyles } from '@material-ui/core'
+
+// const useStyles = makeStyles({
+//   btn: {
+//     fontSize: 60,
+//     backgroundColor: 'violet',
+//     '&:hover': {
+//       background: 'blue'
+//     },
+//   },
+//   title: {
+//     textDecoration: 'underline',
+//     marginBottom: 20,
+//   }
+// })
+
+// const classes = useStyles()
 
 import Auth from '../utils/auth';
 import { saveJob, searchApiJobs } from '../utils/API';
@@ -89,7 +106,8 @@ const SearchJobs = () => {
 
   return (
     <>
-      <Jumbotron fluid className="text-light bg-dark">
+    <Typography color="primary">
+      <Jumbotron>
         <Container>
           <h1>Search for Jobs!</h1>
           <Form onSubmit={handleFormSubmit}>
@@ -105,7 +123,7 @@ const SearchJobs = () => {
                 />
               </Col>
               <Col xs={12} md={4}>
-                <Button color="primary" type="submit" variant="success" size="lg">
+                <Button color="secondary" type="submit" variant="success" size="lg">
                   Submit Search
                 </Button>
               </Col>
@@ -115,6 +133,7 @@ const SearchJobs = () => {
       </Jumbotron>
 
       <Container>
+        <Typography variant="h1" color="secondary"> TESTING </Typography>
         <h2>
           {searchedJobs.length
             ? `Viewing ${searchedJobs.length} results:`
@@ -123,7 +142,7 @@ const SearchJobs = () => {
         <CardColumns>
           {searchedJobs.map((job) => {
             return (
-              <Card key={job.jobId} border="dark">
+              <Card key={job.jobId} border="primary">
                 {/* {job.company ? (
                   <Card.Img
                     src={job.company}
@@ -156,6 +175,7 @@ const SearchJobs = () => {
           })}
         </CardColumns>
       </Container>
+      </Typography>
     </>
   );
 };
