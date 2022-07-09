@@ -73,6 +73,7 @@ const SavedJobs = () => {
                   <p className="small">Title: {job.name}</p>
                   <Card.Text>{job.level}</Card.Text>
                   <Card.Text>{job.location}</Card.Text>
+                 <Card.Text><Link to={{ pathname: `${job.link}` }} target="_blank" >job link</Link></Card.Text>
                   <Button
                     className="btn-block btn-danger"
                     onClick={() => handleDeleteJob(job.jobId)}

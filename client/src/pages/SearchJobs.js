@@ -126,13 +126,6 @@ const SearchJobs = () => {
           {searchedJobs.map((job) => {
             return (
               <Card key={job.jobId} border="dark">
-                {/* {job.company ? (
-                  <Card.Img
-                    src={job.company}
-                    alt={`The cover for ${job.name}`}
-                    variant="top"
-                  />
-                ) : null} */}
                 <Card.Body>
                   <Card.Title>{job.company}</Card.Title>
                   <p className="small">Title: {job.name}</p>
