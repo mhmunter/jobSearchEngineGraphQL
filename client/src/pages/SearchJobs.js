@@ -167,7 +167,7 @@ const SearchJobs = () => {
                     <Card.Text>{job.location}</Card.Text>
                     <Card.Text>
                       <Link to={{ pathname: `${job.link}` }} target="_blank">
-                        job link
+                        Job Link
                       </Link>
                     </Card.Text>
 

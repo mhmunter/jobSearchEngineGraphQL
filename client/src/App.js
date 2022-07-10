@@ -11,7 +11,6 @@ import {
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import { createTheme, ThemeProvider } from '@material-ui/core';
-import { purple } from '@material-ui/core/colors';
 
 const theme = createTheme({
   palette: {
@@ -75,6 +74,14 @@ const theme = createTheme({
       },
     },
   },
+  typography: {
+    fontFamily: 'Quicksand',
+    fontWeightLight: 300,
+    fontWeightRegular: 400,
+    fontWeightMedium: 500,
+    fontWeightSemiBold: 600,
+    fontWeightBold: 700,
+  }
 });
 
 const httpLink = createHttpLink({
