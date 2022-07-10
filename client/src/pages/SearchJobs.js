@@ -23,9 +23,8 @@ import { saveJobIds, getSavedJobIds } from '../utils/localStorage';
 const useStyles = makeStyles({
   btn: {
     fontSize: 20,
-    backgroundColor: 'red',
     '&:hover': {
-      background: 'blue'
+     background: 'linear-gradient(45deg, #ff5722 30%, #010e5c 90%)',
     },
   },
 })
