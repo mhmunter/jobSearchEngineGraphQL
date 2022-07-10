@@ -2,33 +2,40 @@ import React, { useState, useEffect } from 'react';
 import {
   Jumbotron,
   Container,
-  Col,
-  Form,
+  // Col,
+  // Form,
   // Button,
   Card,
   CardColumns,
 } from 'react-bootstrap';
-import { Typography, Button, makeStyles } from '@material-ui/core';
+import {
+  Grid,
+  TextField,
+  Typography,
+  Button,
+  makeStyles,
+} from '@material-ui/core';
 // import { makeStyles } from '@material-ui/core'
 
 import { Link } from 'react-router-dom';
-
-
 
 import Auth from '../utils/auth';
 import { saveJob, searchApiJobs } from '../utils/API';
 import { saveJobIds, getSavedJobIds } from '../utils/localStorage';
 
-
 const useStyles = makeStyles({
   btn: {
     fontSize: 20,
     '&:hover': {
-     background: 'linear-gradient(45deg, #ff5722 30%, #010e5c 90%)',
+      background: 'linear-gradient(45deg, #ff5722 30%, #010e5c 90%)',
     },
   },
-})
-
+  field: {
+    marginTop: 20,
+    marginBottom: 20,
+    display: 'block',
+  },
+});
 
 const SearchJobs = () => {
   // create state for holding returned google api data
@@ -104,38 +111,37 @@ const SearchJobs = () => {
       console.error(err);
     }
   };
-  const classes = useStyles()
+  const classes = useStyles();
   return (
     <>
       <Typography color="primary">
         <Jumbotron>
           <Container>
             <h1>Search for Jobs!</h1>
-            <Form onSubmit={handleFormSubmit}>
-              <Form.Row>
-                <Col xs={12} md={8}>
-                  <Form.Control
-                    name="searchInput"
-                    value={searchInput}
-                    onChange={(e) => setSearchInput(e.target.value)}
-                    type="text"
-                    size="lg"
-                    placeholder="Search for a job"
-                  />
-                </Col>
-                <Col xs={12} md={4}>
-                  <Button
+            <form noValidate autoComplete="off" onSubmit={handleFormSubmit}>
+              <Grid xs={12} md={8}>
+                <TextField
+                  className={classes.field}
+                  name="searchInput"
+                  value={searchInput}
+                  onChange={(e) => setSearchInput(e.target.value)}
+                  type="text"
+                  label="Search for a Job"
+                  variant="outlined"
+                  color="secondary"
+                  fullWidth
+                />
+                <Button
                   className={classes.btn}
-                    type="submit"
-                    variant="contained"
-                    color="primary"
-                    size="large"
-                  >
-                    Submit Search
-                  </Button>
-                </Col>
-              </Form.Row>
-            </Form>
+                  type="submit"
+                  variant="contained"
+                  color="primary"
+                  size="large"
+                >
+                  Submit Search
+                </Button>
+              </Grid>
+            </form>
           </Container>
         </Jumbotron>
 
@@ -198,4 +204,3 @@ const SearchJobs = () => {
 };
 
 export default SearchJobs;
-
