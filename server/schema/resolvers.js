@@ -16,7 +16,8 @@ const resolvers = {
         return userData;
       }
     },
-    Mutations: {
+  },
+    Mutation: {
       addUser: async (parent, args) => {
         const user = await User.create(args);
         const token = signToken(user);
@@ -48,14 +49,14 @@ const resolvers = {
             { $addToSet: { savedJobs: createdJob._id } },
             { new: true, runValidators: true }
           );
-          return createdJob;
+          return updatedUser;
           
         } catch (err) {
           console.log(err);
           throw new AuthenticationError('Incorrect input');
         }
       },
-      async deleteJob(parent, args, context) {
+      async removeJob(parent, args, context) {
         console.log(user);
         try {
           const deletedJob = await Job.findOneAndRemove({_id: args._id})
@@ -75,7 +76,7 @@ const resolvers = {
       },
     }
   
-
+  
 
   
 };

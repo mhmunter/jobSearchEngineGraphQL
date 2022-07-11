@@ -15,7 +15,6 @@ import { GET_ME } from "../utils/queries";
 import { REMOVE_JOB } from "../utils/mutations";
 import { Link } from 'react-router-dom';
 
-
 const SavedJobs = () => {
   const { loading, data } = useQuery(GET_ME);
   const [removeJob] = useMutation(REMOVE_JOB);

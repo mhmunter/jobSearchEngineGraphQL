@@ -10,9 +10,11 @@ import {
 } from "react-bootstrap";
 
 import Auth from "../utils/auth";
-import { saveJob, searchApiJobs } from "../utils/API";
+import { searchApiJobs } from "../utils/API";
 import { saveJobIds, getSavedJobIds } from "../utils/localStorage";
 import { Link } from 'react-router-dom';
+import { SAVE_JOB } from '../utils/mutations';
+import { useMutation } from "@apollo/client";
 
 const SearchJobs = () => {
   // create state for holding returned google api data
@@ -22,6 +24,8 @@ const SearchJobs = () => {
 
   // create state to hold saved jobId values
   const [savedJobIds, setSavedJobIds] = useState(getSavedJobIds());
+  const [saveJob] = useMutation(SAVE_JOB);
+
 
   // set up useEffect hook to save `savedJobIds` list to localStorage on component unmount
   // learn more here: https://reactjs.org/docs/hooks-effect.html#effects-with-cleanup
@@ -74,13 +78,17 @@ const SearchJobs = () => {
     if (!token) {
       return false;
     }
-
+console.log(jobToSave)
     try {
-      const response = await saveJob(jobToSave, token);
+      const {data} = await saveJob({
+        variables: {name: jobToSave.name, company: jobToSave.company, level: jobToSave.level, location: jobToSave.location, link: jobToSave.link, category: jobToSave.category}
+      })
+      console.log(data);
+      // const response = await saveJob(jobToSave, token);
 
-      if (!response.ok) {
-        throw new Error("something went wrong!");
-      }
+      // if (!response.ok) {
+      //   throw new Error("something went wrong!");
+      // }
 
       // if job successfully saves to user's account, save job id to state
       setSavedJobIds([...savedJobIds, jobToSave.jobId]);
@@ -103,7 +111,7 @@ const SearchJobs = () => {
                   onChange={(e) => setSearchInput(e.target.value)}
                   type="text"
                   size="lg"
-                  placeholder="Search for a job"
+                  placeholder="Enter a company name for job results"
                 />
               </Col>
               <Col xs={12} md={4}>
