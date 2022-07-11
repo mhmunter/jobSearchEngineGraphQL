@@ -1,4 +1,8 @@
-import * as React from 'react';
+import React, { useState } from 'react';
+import { Link } from "react-router-dom";
+// import { Navbar, Nav, Container, Modal, Tab } from "react-bootstrap";
+import SignUpForm from './SignupForm';
+import LoginForm from './LoginForm';
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
@@ -18,23 +22,23 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
-import { makeStyles } from '@material-ui/core';
+import Modal from '@mui/material/Modal'
+import { makeStyles, Tab } from '@material-ui/core';
 
 const useStyles = makeStyles({
-    appBar: {
-        background: 'linear-gradient(45deg, #010e5c 30%, #ff5722 90%)',
-        color: '#90caf9',
-      },
-      typography: {
-        fontFamily: 'Quicksand',
-        fontWeightLight: 300,
-        fontWeightRegular: 400,
-        fontWeightMedium: 500,
-        fontWeightSemiBold: 600,
-        fontWeightBold: 700,
-      },
-    },
-    );
+  appBar: {
+    background: 'linear-gradient(45deg, #010e5c 30%, #ff5722 90%)',
+    color: '#90caf9',
+  },
+  typography: {
+    fontFamily: 'Quicksand',
+    fontWeightLight: 300,
+    fontWeightRegular: 400,
+    fontWeightMedium: 500,
+    fontWeightSemiBold: 600,
+    fontWeightBold: 700,
+  },
+});
 
 const drawerWidth = 240;
 
@@ -54,7 +58,7 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
       }),
       marginRight: 0,
     }),
-  }),
+  })
 );
 
 const AppBar = styled(MuiAppBar, {
@@ -86,6 +90,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 export default function Layout({ children }) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -102,11 +107,16 @@ export default function Layout({ children }) {
       <CssBaseline />
       <AppBar position="fixed" open={open}>
         <Toolbar className={classes.appBar}>
-          <Typography variant="h6" noWrap sx={{ flexGrow: 1 }} component="div" color='#90caf9'>
+          <Typography
+            variant="h6"
+            noWrap
+            sx={{ flexGrow: 1 }}
+            component="div"
+            color="#90caf9"
+          >
             Google Jobs Search
           </Typography>
           <IconButton
-      
             aria-label="open drawer"
             edge="end"
             onClick={handleDrawerOpen}
@@ -119,8 +129,8 @@ export default function Layout({ children }) {
       <Main open={open}>
         <DrawerHeader />
         <div>
-        <div>{children}</div>
-      </div>
+          <div>{children}</div>
+        </div>
       </Main>
       <Drawer
         sx={{
@@ -136,13 +146,21 @@ export default function Layout({ children }) {
       >
         <DrawerHeader>
           <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'rtl' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
+            {theme.direction === 'rtl' ? (
+              <ChevronLeftIcon />
+            ) : (
+              <ChevronRightIcon />
+            )}
           </IconButton>
         </DrawerHeader>
         <Divider />
         <List>
           {['Search For Jobs', 'Login / Sign Up'].map((text, index) => (
-            <ListItem key={text} disablePadding>
+            <ListItem
+              key={text}
+              disablePadding
+              onClick={() => setShowModal(true)}
+            >
               <ListItemButton>
                 <ListItemIcon>
                   {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
@@ -165,6 +183,37 @@ export default function Layout({ children }) {
             </ListItem>
           ))}
         </List>
+        <Modal
+          size="lg"
+          show={showModal}
+          onHide={() => setShowModal(false)}
+          aria-labelledby="signup-modal"
+        >
+          <Tab.Container defaultActiveKey="login">
+            <Modal.Header closeButton>
+              <Modal.Title id="signup-modal">
+                <List variant="pills">
+                  <ListItem>
+                    <Link eventKey="login">Login</Link>
+                  </ListItem>
+                  <ListItem>
+                    <Link eventKey="signup">Sign Up</Link>
+                  </ListItem>
+                </List>
+              </Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <Tab.Content>
+                <Tab.Pane eventKey="login">
+                  <LoginForm handleModalClose={() => setShowModal(false)} />
+                </Tab.Pane>
+                <Tab.Pane eventKey="signup">
+                  <SignUpForm handleModalClose={() => setShowModal(false)} />
+                </Tab.Pane>
+              </Tab.Content>
+            </Modal.Body>
+          </Tab.Container>
+        </Modal>
       </Drawer>
     </Box>
   );
@@ -190,20 +239,20 @@ export default function Layout({ children }) {
 // export default function Layout({ children }) {
 //   const classes = useStyles();
 //   return (
-    // <div className={classes.root}>
-    //   <Drawer
-    //     className={classes.drawer}
-    //     variant="permanent"
-    //     anchor="right"
-    //     classes={{ paper: classes.drawerPaper }}
-    //   >
-    //     <div>
-    //       <Typography variant="h5">Testing</Typography>
-    //     </div>
-    //   </Drawer>
-    //   <div>
-    //     <div className={classes.page}>{children}</div>
-    //   </div>
-    // </div>
+// <div className={classes.root}>
+//   <Drawer
+//     className={classes.drawer}
+//     variant="permanent"
+//     anchor="right"
+//     classes={{ paper: classes.drawerPaper }}
+//   >
+//     <div>
+//       <Typography variant="h5">Testing</Typography>
+//     </div>
+//   </Drawer>
+//   <div>
+//     <div className={classes.page}>{children}</div>
+//   </div>
+// </div>
 //   );
 // }
