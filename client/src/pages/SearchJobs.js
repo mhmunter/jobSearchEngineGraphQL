@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import {
   Jumbotron,
-  Container,
+  // Container,
   // Col,
   // Form,
   // Button,
@@ -9,6 +9,7 @@ import {
   CardColumns,
 } from 'react-bootstrap';
 import {
+  Container,
   Grid,
   TextField,
   Typography,
@@ -30,7 +31,7 @@ const useStyles = makeStyles({
       background: 'linear-gradient(45deg, #ff5722 30%, #010e5c 90%)',
     },
   },
-  field: {
+  searchField: {
     marginTop: 20,
     marginBottom: 20,
     display: 'block',
@@ -116,30 +117,32 @@ const SearchJobs = () => {
     <>
       <Typography color="primary">
         <Jumbotron>
-          <Container>
+          <Container className={classes.searchField}>
             <h1>Search for Jobs!</h1>
             <form noValidate autoComplete="off" onSubmit={handleFormSubmit}>
-              <Grid xs={12} md={8}>
-                <TextField
-                  className={classes.field}
-                  name="searchInput"
-                  value={searchInput}
-                  onChange={(e) => setSearchInput(e.target.value)}
-                  type="text"
-                  label="Search for a Job"
-                  variant="outlined"
-                  color="secondary"
-                  fullWidth
-                />
-                <Button
-                  className={classes.btn}
-                  type="submit"
-                  variant="contained"
-                  color="primary"
-                  size="large"
-                >
-                  Submit Search
-                </Button>
+              <Grid container>
+                <Grid item xs={12} md={6}>
+                  <TextField
+                    name="searchInput"
+                    value={searchInput}
+                    onChange={(e) => setSearchInput(e.target.value)}
+                    type="text"
+                    label="Search for a Job"
+                    variant="outlined"
+                    color="secondary"
+                    fullWidth
+                  />
+                </Grid>
+                <Grid item xs={12} md={6}>
+                  <Button
+                    className={classes.btn}
+                    type="submit"
+                    variant="contained"
+                    color="primary"
+                  >
+                    Submit Search
+                  </Button>
+                </Grid>
               </Grid>
             </form>
           </Container>

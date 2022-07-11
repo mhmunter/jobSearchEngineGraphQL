@@ -11,6 +11,7 @@ import {
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import { createTheme, ThemeProvider } from '@material-ui/core';
+import Layout from './components/Layout';
 
 const theme = createTheme({
   palette: {
@@ -59,7 +60,8 @@ const theme = createTheme({
         border: '1px solid #bdbdbd',
         backgroundColor: '#fafafa',
         opacity: 1,
-        transition: 'background-color 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
+        transition:
+          'background-color 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
       },
     },
     MuiButton: {
@@ -81,7 +83,7 @@ const theme = createTheme({
     fontWeightMedium: 500,
     fontWeightSemiBold: 600,
     fontWeightBold: 700,
-  }
+  },
 });
 
 const httpLink = createHttpLink({
@@ -108,16 +110,18 @@ function App() {
     <ThemeProvider theme={theme}>
       <ApolloProvider client={client}>
         <Router>
-          <>
-            <Navbar />
-            <Switch>
-              <Route exact path="/" component={SearchJobs} />
-              <Route exact path="/saved" component={SavedJobs} />
-              <Route
-                render={() => <h1 className="display-2">Wrong page!</h1>}
-              />
-            </Switch>
-          </>
+          <Layout>
+            <>
+              <Navbar />
+              <Switch>
+                <Route exact path="/" component={SearchJobs} />
+                <Route exact path="/saved" component={SavedJobs} />
+                <Route
+                  render={() => <h1 className="display-2">Wrong page!</h1>}
+                />
+              </Switch>
+            </>
+          </Layout>
         </Router>
       </ApolloProvider>
     </ThemeProvider>
