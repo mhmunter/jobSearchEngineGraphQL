@@ -18,6 +18,23 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
+import { makeStyles } from '@material-ui/core';
+
+const useStyles = makeStyles({
+    appBar: {
+        background: 'linear-gradient(45deg, #010e5c 30%, #ff5722 90%)',
+        color: '#90caf9',
+      },
+      typography: {
+        fontFamily: 'Quicksand',
+        fontWeightLight: 300,
+        fontWeightRegular: 400,
+        fontWeightMedium: 500,
+        fontWeightSemiBold: 600,
+        fontWeightBold: 700,
+      },
+    },
+    );
 
 const drawerWidth = 240;
 
@@ -78,16 +95,18 @@ export default function Layout({ children }) {
     setOpen(false);
   };
 
+  const classes = useStyles();
+
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
       <AppBar position="fixed" open={open}>
-        <Toolbar>
-          <Typography variant="h6" noWrap sx={{ flexGrow: 1 }} component="div">
+        <Toolbar className={classes.appBar}>
+          <Typography variant="h6" noWrap sx={{ flexGrow: 1 }} component="div" color='#90caf9'>
             Google Jobs Search
           </Typography>
           <IconButton
-            color="inherit"
+      
             aria-label="open drawer"
             edge="end"
             onClick={handleDrawerOpen}
