@@ -3,8 +3,9 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import SearchJobs from "./pages/SearchJobs";
 import SavedJobs from "./pages/SavedJobs";
 import Navbar from "./components/Navbar";
+import { ApolloProvider } from '@apollo/react-hooks';
+
 import {
-  ApolloProvider,
   ApolloClient,
   InMemoryCache,
   createHttpLink,
