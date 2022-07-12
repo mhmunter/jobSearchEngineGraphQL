@@ -22,11 +22,12 @@ export const ADD_USER = gql`
         jobCount
         savedJobs {
           jobId
-          image
-          link
-          title
-          description
-          authors
+         name
+         company
+         category
+         level
+         location
+         link
         }
       }
       token
@@ -43,11 +44,12 @@ export const SAVE_JOB = gql`
       jobCount
       savedJobs {
         jobId
-        description
-        title
-        image
+        name
+        company
+        catagory
+        level
+        locations
         link
-        authors
       }
     }
   }
@@ -61,10 +63,11 @@ export const REMOVE_JOB = gql`
       email
       savedJobs {
         jobId
-        authors
-        description
-        title
-        image
+        name
+        company
+        catagory
+        level
+        location
         link
       }
     }

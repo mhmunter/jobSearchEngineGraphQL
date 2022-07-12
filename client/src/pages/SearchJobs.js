@@ -1,23 +1,48 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 import {
   Jumbotron,
-  Container,
-  Col,
-  Form,
-  Button,
+  // Container,
+  // Col,
+  // Form,
+  // Button,
   Card,
   CardColumns,
-} from "react-bootstrap";
+} from 'react-bootstrap';
+import {
+  Container,
+  Grid,
+  TextField,
+  Typography,
+  Button,
+  makeStyles,
+} from '@material-ui/core';
+// import { makeStyles } from '@material-ui/core'
 
-import Auth from "../utils/auth";
-import { saveJob, searchApiJobs } from "../utils/API";
-import { saveJobIds, getSavedJobIds } from "../utils/localStorage";
+import { Link } from 'react-router-dom';
+
+import Auth from '../utils/auth';
+import { saveJob, searchApiJobs } from '../utils/API';
+import { saveJobIds, getSavedJobIds } from '../utils/localStorage';
+
+const useStyles = makeStyles({
+  btn: {
+    fontSize: 20,
+    '&:hover': {
+      background: 'linear-gradient(45deg, #ff5722 30%, #010e5c 90%)',
+    },
+  },
+  searchField: {
+    marginTop: 20,
+    marginBottom: 20,
+    display: 'block',
+  },
+});
 
 const SearchJobs = () => {
   // create state for holding returned google api data
   const [searchedJobs, setSearchedJobs] = useState([]);
   // create state for holding our search field data
-  const [searchInput, setSearchInput] = useState("");
+  const [searchInput, setSearchInput] = useState('');
 
   // create state to hold saved jobId values
   const [savedJobIds, setSavedJobIds] = useState(getSavedJobIds());
@@ -38,24 +63,25 @@ const SearchJobs = () => {
 
     try {
       const response = await searchApiJobs(searchInput);
-
+      console.log(response);
       if (!response.ok) {
-        throw new Error("something went wrong!");
+        throw new Error('something went wrong!');
       }
 
       const { results } = await response.json();
-
+      console.log(results);
       const jobData = results.map((job) => ({
-        jobId: job.id || ["No job to display"],
-        name: job.name || ["No job to display"],
-        company: job.company.name || ["No job to display"],
-        catagory: job.categories.name || ["No job to display"],
-        level: job.levels.name || ["No job to display"],
-        location: job.locations.name || ["No job to display"],
+        jobId: job.id || ['No job to display'],
+        name: job.name || ['No job to display'],
+        company: job.company.name || ['No job to display'],
+        catagory: job.categories[0].name || ['No job to display'],
+        level: job.levels[0].name || ['No job to display'],
+        location: job.locations[0].name || ['No job to display'],
+        link: job.refs.landing_page || ['No job to display'],
       }));
 
       setSearchedJobs(jobData);
-      setSearchInput("");
+      setSearchInput('');
     } catch (err) {
       console.error(err);
     }
@@ -77,7 +103,7 @@ const SearchJobs = () => {
       const response = await saveJob(jobToSave, token);
 
       if (!response.ok) {
-        throw new Error("something went wrong!");
+        throw new Error('something went wrong!');
       }
 
       // if job successfully saves to user's account, save job id to state
@@ -86,76 +112,96 @@ const SearchJobs = () => {
       console.error(err);
     }
   };
-
+  const classes = useStyles();
   return (
     <>
-      <Jumbotron fluid className="text-light bg-dark">
-        <Container>
-          <h1>Search for Jobs!</h1>
-          <Form onSubmit={handleFormSubmit}>
-            <Form.Row>
-              <Col xs={12} md={8}>
-                <Form.Control
-                  name="searchInput"
-                  value={searchInput}
-                  onChange={(e) => setSearchInput(e.target.value)}
-                  type="text"
-                  size="lg"
-                  placeholder="Search for a job"
-                />
-              </Col>
-              <Col xs={12} md={4}>
-                <Button type="submit" variant="success" size="lg">
-                  Submit Search
-                </Button>
-              </Col>
-            </Form.Row>
-          </Form>
-        </Container>
-      </Jumbotron>
+      <Typography color="primary">
+        <Jumbotron>
+          <Container className={classes.searchField}>
+            <h1>Search for Jobs!</h1>
+            <form noValidate autoComplete="off" onSubmit={handleFormSubmit}>
+              <Grid container>
+                <Grid item xs={12} md={6}>
+                  <TextField
+                    name="searchInput"
+                    value={searchInput}
+                    onChange={(e) => setSearchInput(e.target.value)}
+                    type="text"
+                    label="Search for a Job"
+                    variant="outlined"
+                    color="secondary"
+                    fullWidth
+                  />
+                </Grid>
+                <Grid item xs={12} md={6}>
+                  <Button
+                    className={classes.btn}
+                    type="submit"
+                    variant="contained"
+                    color="primary"
+                  >
+                    Submit Search
+                  </Button>
+                </Grid>
+              </Grid>
+            </form>
+          </Container>
+        </Jumbotron>
 
-      <Container>
-        <h2>
-          {searchedJobs.length
-            ? `Viewing ${searchedJobs.length} results:`
-            : "Search for a job to begin"}
-        </h2>
-        <CardColumns>
-          {searchedJobs.map((job) => {
-            return (
-              <Card key={job.jobId} border="dark">
-                {/* {job.company ? (
+        <Container>
+          <Typography variant="h1" color="secondary">
+            {' '}
+            TESTING{' '}
+          </Typography>
+          <h2>
+            {searchedJobs.length
+              ? `Viewing ${searchedJobs.length} results:`
+              : 'Search for a job to begin'}
+          </h2>
+          <CardColumns>
+            {searchedJobs.map((job) => {
+              return (
+                <Card key={job.jobId} border="primary">
+                  {/* {job.company ? (
                   <Card.Img
                     src={job.company}
                     alt={`The cover for ${job.name}`}
                     variant="top"
                   />
                 ) : null} */}
-                <Card.Body>
-                  <Card.Title>{job.company}</Card.Title>
-                  <p className="small">Title: {job.Title}</p>
-                  <Card.Text>{job.level}</Card.Text>
-                  {Auth.loggedIn() && (
-                    <Button
-                      disabled={savedJobIds?.some(
-                        (savedJobId) => savedJobId === job.jobId
-                      )}
-                      className="btn-block btn-info"
-                      onClick={() => handleSaveJob(job.jobId)}
-                    >
-                      {savedJobIds?.some(
-                        (savedJobId) => savedJobId === job.jobId
-                      )
-                        ? "This job has already been saved!"
-                        : "Save this Job!"}
-                    </Button>
-                  )}
-                </Card.Body>
-              </Card>
-            );
-          })}
-        </CardColumns>
-      </Container>
+                  <Card.Body>
+                    <Card.Title>{job.company}</Card.Title>
+                    <p className="small">Title: {job.name}</p>
+                    <Card.Text>{job.level}</Card.Text>
+                    <Card.Text>{job.location}</Card.Text>
+                    <Card.Text>
+                      <Link to={{ pathname: `${job.link}` }} target="_blank">
+                        Job Link
+                      </Link>
+                    </Card.Text>
+
+                    {Auth.loggedIn() && (
+                      <Button
+                        disabled={savedJobIds?.some(
+                          (savedJobId) => savedJobId === job.jobId
+                        )}
+                        className="btn-block btn-info"
+                        onClick={() => handleSaveJob(job.jobId)}
+                      >
+                        {savedJobIds?.some(
+                          (savedJobId) => savedJobId === job.jobId
+                        )
+                          ? 'This job has already been saved!'
+                          : 'Save this Job!'}
+                      </Button>
+                    )}
+                  </Card.Body>
+                </Card>
+              );
+            })}
+          </CardColumns>
+        </Container>
+      </Typography>
     </>
   );
 };
