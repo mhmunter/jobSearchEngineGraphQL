@@ -20,51 +20,54 @@ export const ADD_USER = gql`
         _id
         username
         email
-        bookCount
-        savedBooks {
-          bookId
-          image
-          link
-          title
-          description
-          authors
+        jobCount
+        savedJobs {
+          jobId
+         name
+         company
+         category
+         level
+         location
+         link
         }
       }
     }
   }
 `;
 
-export const SAVE_BOOK = gql`
-  mutation saveBook($input: savedBook!) {
-    saveBook(input: $input) {
+export const SAVE_JOB = gql`
+  mutation saveJob($input: savedJob!) {
+    saveJob(input: $input) {
       _id
       username
       email
-      bookCount
-      savedBooks {
-        bookId
-        description
-        title
-        image
+      jobCount
+      savedJobs {
+        jobId
+        name
+        company
+        catagory
+        level
+        locations
         link
-        authors
       }
     }
   }
 `;
 
-export const REMOVE_BOOK = gql`
-  mutation removeBook($bookId: ID!) {
-    removeBook(bookId: $bookId) {
+export const REMOVE_JOB = gql`
+  mutation removeJob($jobId: ID!) {
+    removeJob(jobId: $jobId) {
       _id
       username
       email
-      savedBooks {
-        bookId
-        authors
-        description
-        title
-        image
+      savedJobs {
+        jobId
+        name
+        company
+        catagory
+        level
+        location
         link
       }
     }
