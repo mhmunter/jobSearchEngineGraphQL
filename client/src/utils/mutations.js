@@ -12,6 +12,7 @@ export const LOGIN_USER = gql`
   }
 `;
 
+
 export const ADD_USER = gql`
   mutation addUser($username: String!, $email: String!, $password: String!) {
     addUser(username: $username, email: $email, password: $password) {
@@ -19,52 +20,32 @@ export const ADD_USER = gql`
       user {
         _id
         username
-        email
-        bookCount
-        savedBooks {
-          bookId
-          image
-          link
-          title
-          description
-          authors
-        }
       }
     }
   }
 `;
 
-export const SAVE_BOOK = gql`
-  mutation saveBook($input: savedBook!) {
-    saveBook(input: $input) {
+export const SAVE_JOB = gql`
+  mutation saveJob($name: String, $company: String!, $level: String!, $location: String!, $link: String, $category: String) {
+    saveJob(name: $name, company: $company, level: $level, location: $location, link: $link, category: $category) {
       _id
-      username
-      email
-      bookCount
-      savedBooks {
-        bookId
-        description
-        title
-        image
-        link
-        authors
-      }
+    
     }
   }
 `;
 
-export const REMOVE_BOOK = gql`
-  mutation removeBook($bookId: ID!) {
-    removeBook(bookId: $bookId) {
+export const REMOVE_JOB = gql`
+  mutation removeJob($jobId: ID!) {
+    removeJob(jobId: $jobId) {
       _id
       username
       email
-      savedBooks {
-        bookId
-        authors
-        description
-        title
-        image
+      savedJobs {
+        name
+        company
+        catagory
+        level
+        location
         link
       }
     }
