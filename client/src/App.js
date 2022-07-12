@@ -4,6 +4,7 @@ import SearchJobs from './pages/SearchJobs';
 import SavedJobs from './pages/SavedJobs';
 import Navbar from './components/Navbar';
 import {
+  ApolloProvider,
   ApolloClient,
   InMemoryCache,
   createHttpLink,
