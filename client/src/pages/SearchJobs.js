@@ -110,9 +110,9 @@ console.log(jobToSave)
       console.log(data);
       // const response = await saveJob(jobToSave, token);
 
-      if (!response.ok) {
-        throw new Error('something went wrong!');
-      }
+      // if (!response.ok) {
+      //   throw new Error('something went wrong!');
+      // }
 
       // if job successfully saves to user's account, save job id to state
       setSavedJobIds([...savedJobIds, jobToSave.jobId]);
