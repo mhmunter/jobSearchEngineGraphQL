@@ -1,6 +1,9 @@
 {
   "name": "server",
   "version": "1.0.0",
+  "engines": {
+    "node": "16.14.2"
+  },
   "main": "server/server.js",
   "scripts": {
     "start": "node server/server.js",
