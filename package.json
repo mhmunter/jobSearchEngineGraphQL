@@ -21,7 +21,7 @@
   "devDependencies": {
     "nodemon": "^2.0.3"
   },
-  "description": "heroku site : https://rtleib-fates.herokuapp.com/",
+  "description": "heroku site : https://immense-ocean-63778.herokuapp.com/",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/mhmunter/fates.git"
