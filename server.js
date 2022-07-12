@@ -2,6 +2,8 @@
 const express = require('express');
 const path = require('path');
 const db = require('./server/config/connection');
+require('dotenv').config();
+
 // const routes = require('./routes');
 // import apollo server
 const { ApolloServer } = require('apollo-server-express');
