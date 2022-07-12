@@ -107,7 +107,7 @@ const SearchJobs = () => {
 console.log(jobToSave)
     try {
       const {data} = await saveJob({
-        variables: {name: jobToSave.name, company: jobToSave.company, level: jobToSave.level, location: jobToSave.location, link: jobToSave.link, category: jobToSave.category}
+        variables: {name: jobToSave.name, company: jobToSave.company, level: jobToSave.level, location: jobToSave.location, link: jobToSave.link, category: jobToSave.catagory}
       })
       console.log(data);
       // const response = await saveJob(jobToSave, token);

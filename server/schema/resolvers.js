@@ -41,7 +41,7 @@ const resolvers = {
         return { token, user };
       },
       async saveJob(parent, args, context) {
-        console.log(user);
+        console.log(args);
         try {
           const createdJob = await Job.create(args)
           const updatedUser = await User.findOneAndUpdate(
@@ -57,7 +57,7 @@ const resolvers = {
         }
       },
       async removeJob(parent, args, context) {
-        console.log(user);
+        console.log(args);
         try {
           const deletedJob = await Job.findOneAndRemove({_id: args._id})
           const updatedUser = await User.findOneAndUpdate(

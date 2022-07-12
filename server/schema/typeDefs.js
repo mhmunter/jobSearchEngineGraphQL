@@ -13,7 +13,7 @@ type Job {
   _id: ID
   name: String
   company: String
-  catagory: String
+  category: String
   level: String
   location: String
   link: String
