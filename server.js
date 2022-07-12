@@ -1,14 +1,14 @@
 
 const express = require('express');
 const path = require('path');
-const db = require('./config/connection');
+const db = require('./server/config/connection');
 // const routes = require('./routes');
 // import apollo server
 const { ApolloServer } = require('apollo-server-express');
 // import typeDefs & resolvers
-const { typeDefs, resolvers } = require('./schema');
+const { typeDefs, resolvers } = require('./server/schema');
 // import middleware to verify jwt
-const { authMiddleware } = require('./utils/auth');
+const { authMiddleware } = require('./server/utils/auth');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
