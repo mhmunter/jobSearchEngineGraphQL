@@ -31,7 +31,7 @@ type Query {
 type Mutation {
   login(email: String!, password: String!): Auth
   addUser(username: String!, email: String!, password: String!): Auth
-  saveJob(name: String, company: String!, level: String!, location: String!, link: String): Job
+  saveJob(name: String, company: String!, level: String!, location: String!, link: String, category: String): User
   removeJob(_id: ID): User
 }
 `;
