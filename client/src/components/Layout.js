@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from "react-router-dom";
-// import { Navbar, Nav, Container, Modal, Tab } from "react-bootstrap";
+// import { Navbar, Nav, Container} from "react-bootstrap";
 import SignUpForm from './SignupForm';
 import LoginForm from './LoginForm';
 import { styled, useTheme } from '@mui/material/styles';
@@ -155,9 +155,10 @@ export default function Layout({ children }) {
         </DrawerHeader>
         <Divider />
         <List>
-          {['Search For Jobs', 'Login / Sign Up'].map((text, index) => (
+          {[{name:'Search For Jobs', link: '/'}, {name:'Login', link: '/login'}, {name:'Signup', link: '/signup'}].map((text, index) => (
+            <Link to= {text.link}>
             <ListItem
-              key={text}
+              key={text.name}
               disablePadding
               onClick={() => setShowModal(true)}
             >
@@ -165,9 +166,10 @@ export default function Layout({ children }) {
                 <ListItemIcon>
                   {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
                 </ListItemIcon>
-                <ListItemText primary={text} />
+                <ListItemText primary={text.name} />
               </ListItemButton>
             </ListItem>
+            </Link>
           ))}
         </List>
         <Divider />
@@ -194,7 +196,7 @@ export default function Layout({ children }) {
               <Modal.Title id="signup-modal">
                 <List variant="pills">
                   <ListItem>
-                    <Link eventKey="login">Login</Link>
+                    <Link to= '/login'>Login</Link>
                   </ListItem>
                   <ListItem>
                     <Link eventKey="signup">Sign Up</Link>

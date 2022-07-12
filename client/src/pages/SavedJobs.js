@@ -23,7 +23,7 @@ const SavedJobs = () => {
   // create function that accepts the job's mongo _id value as param and deletes the job from the database
   const handleDeleteJob = async (jobId) => {
     const token = Auth.loggedIn() ? Auth.getToken() : null;
-
+    console.log(jobId)
     if (!token) {
       return false;
     }
@@ -52,14 +52,14 @@ const SavedJobs = () => {
       </Jumbotron>
       <Container>
         <h2>
-          {userData.savedJobs.length
+          {userData?.savedJobs?.length
             ? `Viewing ${userData.savedJobs.length} saved ${
                 userData.savedJobs.length === 1 ? "job" : "jobs"
               }:`
             : "You have no saved jobs!"}
         </h2>
         <CardColumns>
-          {userData.savedJobs.map((job) => {
+          {userData?.savedJobs?.map((job) => {
             return (
               <Card key={job.jobId} border="dark">
                 {/* {job.image ? (
@@ -77,7 +77,8 @@ const SavedJobs = () => {
                  <Card.Text><Link to={{ pathname: `${job.link}` }} target="_blank" >job link</Link></Card.Text>
                   <Button
                     className="btn-block btn-danger"
-                    onClick={() => handleDeleteJob(job.jobId)}
+                    data-id={job._id}
+                    onClick={(e) => handleDeleteJob(e.target.dataset.id)}
                   >
                     Delete this Job!
                   </Button>
