@@ -1,6 +1,6 @@
 const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
-// const Job = require('./Job');
+const Job = require('./Job');
 
 // import schema from Job.js
 //const jobSchema = require('./Job');

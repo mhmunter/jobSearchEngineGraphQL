@@ -6,11 +6,11 @@ export const LOGIN_USER = gql`
       token
       user {
         _id
-        username
       }
     }
   }
 `;
+
 
 export const ADD_USER = gql`
   mutation addUser($username: String!, $email: String!, $password: String!) {
@@ -19,38 +19,17 @@ export const ADD_USER = gql`
       user {
         _id
         username
-        email
-        jobCount
-        savedJobs {
-          jobId
-         name
-         company
-         category
-         level
-         location
-         link
-        }
       }
+      token
     }
   }
 `;
 
 export const SAVE_JOB = gql`
-  mutation saveJob($input: savedJob!) {
-    saveJob(input: $input) {
+  mutation saveJob($name: String, $company: String!, $level: String!, $location: String!, $link: String, $category: String) {
+    saveJob(name: $name, company: $company, level: $level, location: $location, link: $link, category: $category) {
       _id
-      username
-      email
-      jobCount
-      savedJobs {
-        jobId
-        name
-        company
-        catagory
-        level
-        locations
-        link
-      }
+    
     }
   }
 `;
@@ -62,7 +41,6 @@ export const REMOVE_JOB = gql`
       username
       email
       savedJobs {
-        jobId
         name
         company
         catagory

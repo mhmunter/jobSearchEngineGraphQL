@@ -19,6 +19,8 @@ import {
 // import { makeStyles } from '@material-ui/core'
 
 import { Link } from 'react-router-dom';
+import { SAVE_JOB } from '../utils/mutations';
+import { useMutation } from "@apollo/client";
 
 import Auth from '../utils/auth';
 import { saveJob, searchApiJobs } from '../utils/API';
@@ -46,6 +48,8 @@ const SearchJobs = () => {
 
   // create state to hold saved jobId values
   const [savedJobIds, setSavedJobIds] = useState(getSavedJobIds());
+  const [saveJob] = useMutation(SAVE_JOB);
+
 
   // set up useEffect hook to save `savedJobIds` list to localStorage on component unmount
   // learn more here: https://reactjs.org/docs/hooks-effect.html#effects-with-cleanup
@@ -98,9 +102,13 @@ const SearchJobs = () => {
     if (!token) {
       return false;
     }
-
+console.log(jobToSave)
     try {
-      const response = await saveJob(jobToSave, token);
+      const {data} = await saveJob({
+        variables: {name: jobToSave.name, company: jobToSave.company, level: jobToSave.level, location: jobToSave.location, link: jobToSave.link, category: jobToSave.category}
+      })
+      console.log(data);
+      // const response = await saveJob(jobToSave, token);
 
       if (!response.ok) {
         throw new Error('something went wrong!');
