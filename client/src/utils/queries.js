@@ -8,10 +8,10 @@ export const GET_ME = gql`
       email
       jobCount
       savedJobs {
-        jobId
+       _id
         name
         company
-        catagory
+        category
         level
         location
         link

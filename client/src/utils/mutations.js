@@ -24,10 +24,10 @@ export const ADD_USER = gql`
     }
   }
 `;
-
+// returning only id, fix it if nesserary
 export const SAVE_JOB = gql`
   mutation saveJob($name: String, $company: String!, $level: String!, $location: String!, $link: String, $category: String) {
-    saveJob(name: $name, company: $company, level: $level, location: $location, link: $link, category: $category) {
+    saveJob(name: $name, company: $company, level: $level, location: $location, link: $link, catagory: $category) {
       _id
     
     }
@@ -36,14 +36,14 @@ export const SAVE_JOB = gql`
 
 export const REMOVE_JOB = gql`
   mutation removeJob($jobId: ID!) {
-    removeJob(jobId: $jobId) {
+    removeJob(_id: $jobId) {
       _id
       username
       email
       savedJobs {
         name
         company
-        catagory
+        category
         level
         location
         link

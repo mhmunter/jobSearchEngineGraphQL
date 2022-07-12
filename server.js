@@ -2,6 +2,8 @@
 const express = require('express');
 const path = require('path');
 const db = require('./server/config/connection');
+require('dotenv').config();
+
 // const routes = require('./routes');
 // import apollo server
 const { ApolloServer } = require('apollo-server-express');
@@ -35,7 +37,7 @@ const startApolloServer = async (typeDefs, resolvers) => {
   }
 
   app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../client/build/index.html'));
+    res.sendFile(path.join(__dirname, '../client/public/index.html'));
   });
 
   db.once('open', () => {

@@ -12,6 +12,8 @@ import {
 import { setContext } from '@apollo/client/link/context';
 import { createTheme, ThemeProvider } from '@material-ui/core';
 import Layout from './components/Layout';
+import LoginForm from './components/LoginForm';
+import SignupForm from './components/SignupForm';
 
 const theme = createTheme({
   palette: {
@@ -116,6 +118,8 @@ function App() {
               <Switch>
                 <Route exact path="/" component={SearchJobs} />
                 <Route exact path="/saved" component={SavedJobs} />
+                <Route exact path='/login' component={LoginForm}/>
+                <Route exact path='/signup' component={SignupForm}/>
                 <Route
                   render={() => <h1 className="display-2">Wrong page!</h1>}
                 />
