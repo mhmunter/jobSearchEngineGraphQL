@@ -16,3 +16,8 @@ h6 {
   font-weight: 300;
   font-style: italic;
 } */
+
+.jumbotron {
+  background-image: url(https://img.freepik.com/premium-photo/simple-top-view-wood-table-creative-flat-lay-office-desk-laptop-notebooks-coffee-cup-wooden-background_35674-2688.jpg?w=1380);
+  background-size: cover;
+}
