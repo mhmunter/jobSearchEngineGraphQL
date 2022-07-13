@@ -33,9 +33,9 @@ Here is a screenshot of the application
   ### Collaborators
    This application was made possible by the following people:
 
-    https://github.com/rtleib
-    https://github.com/SipG789
-    https://github.com/mhmunter
+    https://github.com/rtleib 
+    https://github.com/SipG789 
+    https://github.com/mhmunter 
 
   ### Instructions
 
