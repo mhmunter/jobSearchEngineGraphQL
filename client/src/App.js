@@ -14,6 +14,7 @@ import { createTheme, ThemeProvider } from '@material-ui/core';
 import Layout from './components/Layout';
 import LoginForm from './components/LoginForm';
 import SignupForm from './components/SignupForm';
+import Auth from './utils/auth'
 
 const theme = createTheme({
   palette: {
@@ -117,9 +118,10 @@ function App() {
               <Navbar />
               <Switch>
                 <Route exact path="/" component={SearchJobs} />
-                <Route exact path="/saved" component={SavedJobs} />
                 <Route exact path='/login' component={LoginForm}/>
                 <Route exact path='/signup' component={SignupForm}/>
+                <Route exact path='/logout' component={Auth}/>
+                <Route exact path="/saved" component={SavedJobs} />
                 <Route
                   render={() => <h1 className="display-2">Wrong page!</h1>}
                 />
