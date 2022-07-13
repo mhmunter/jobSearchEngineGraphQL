@@ -62,19 +62,12 @@ const SavedJobs = () => {
           {userData?.savedJobs?.map((job) => {
             return (
               <Card key={job.jobId} border="dark">
-                {/* {job.image ? (
-                  <Card.Img
-                    src={job.image}
-                    alt={`The cover for ${job.title}`}
-                    variant="top"
-                  />
-                ) : null} */}
                   <Card.Body>
                   <Card.Title>{job.company}</Card.Title>
                   <p className="small">Title: {job.name}</p>
                   <Card.Text>{job.level}</Card.Text>
                   <Card.Text>{job.location}</Card.Text>
-                 <Card.Text><Link to={{ pathname: `${job.link}` }} target="_blank" >job link</Link></Card.Text>
+                 <Card.Text><Link to={{ pathname: `${job.link}` }} target="_blank">job link</Link></Card.Text>
                   <Button
                     className="btn-block btn-danger"
                     data-id={job._id}

@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Jumbotron, Card, CardColumns } from 'react-bootstrap';
+import React, { useState, useEffect } from "react";
+import { Jumbotron, Card, CardColumns } from "react-bootstrap";
 import {
   Container,
   Grid,
@@ -7,17 +7,17 @@ import {
   Typography,
   Button,
   makeStyles,
-} from '@material-ui/core';
+} from "@material-ui/core";
 
-import Auth from '../utils/auth';
+import Auth from "../utils/auth";
 
 // import { saveJobIds, getSavedJobIds } from "../utils/localStorage";
-import { Link } from 'react-router-dom';
-import { SAVE_JOB } from '../utils/mutations';
-import { useMutation } from '@apollo/client';
+import { Link } from "react-router-dom";
+import { SAVE_JOB } from "../utils/mutations";
+import { useMutation } from "@apollo/client";
 
-import { saveJob, searchApiJobs } from '../utils/API';
-import { saveJobIds, getSavedJobIds } from '../utils/localStorage';
+import { saveJob, searchApiJobs } from "../utils/API";
+import { saveJobIds, getSavedJobIds } from "../utils/localStorage";
 
 const useStyles = makeStyles({
   btn: {
@@ -30,14 +30,14 @@ const useStyles = makeStyles({
   searchField: {
     marginTop: 20,
     marginBottom: 20,
-    display: 'block',
+    display: "block",
   },
   savedBtn: {
     padding: 26.5,
-    background: '#010e5c',
-    '&:hover': {
-      background: '#ff5722',
-      color: '#010e5c',
+    background: "#010e5c",
+    "&:hover": {
+      background: "#ff5722",
+      color: "#010e5c",
     },
   },
 });
@@ -46,7 +46,7 @@ const SearchJobs = () => {
   // create state for holding returned google api data
   const [searchedJobs, setSearchedJobs] = useState([]);
   // create state for holding our search field data
-  const [searchInput, setSearchInput] = useState('');
+  const [searchInput, setSearchInput] = useState("");
 
   // create state to hold saved jobId values
   const [savedJobIds, setSavedJobIds] = useState(getSavedJobIds());
@@ -70,23 +70,23 @@ const SearchJobs = () => {
       const response = await searchApiJobs(searchInput);
       console.log(response);
       if (!response.ok) {
-        throw new Error('something went wrong!');
+        throw new Error("something went wrong!");
       }
 
       const { results } = await response.json();
       console.log(results);
       const jobData = results.map((job) => ({
-        jobId: job.id || ['No job to display'],
-        name: job.name || ['No job to display'],
-        company: job.company.name || ['No job to display'],
-        catagory: job.categories[0].name || ['No job to display'],
-        level: job.levels[0].name || ['No job to display'],
-        location: job.locations[0].name || ['No job to display'],
-        link: job.refs.landing_page || ['No job to display'],
+        jobId: job.id || ["No job to display"],
+        name: job.name || ["No job to display"],
+        company: job.company.name || ["No job to display"],
+        category: job.categories[0].name || ["No job to display"],
+        level: job.levels[0].name || ["No job to display"],
+        location: job.locations[0].name || ["No job to display"],
+        link: job.refs.landing_page || ["No job to display"],
       }));
 
       setSearchedJobs(jobData);
-      setSearchInput('');
+      setSearchInput("");
     } catch (err) {
       console.error(err);
     }
@@ -112,7 +112,7 @@ const SearchJobs = () => {
           level: jobToSave.level,
           location: jobToSave.location,
           link: jobToSave.link,
-          category: jobToSave.catagory,
+          category: jobToSave.category,
         },
       });
       console.log(data);
@@ -168,19 +168,12 @@ const SearchJobs = () => {
           <h2>
             {searchedJobs.length
               ? `Viewing ${searchedJobs.length} results:`
-              : 'Search for a job to begin'}
+              : "Search for a job to begin"}
           </h2>
           <CardColumns>
             {searchedJobs.map((job) => {
               return (
                 <Card key={job.jobId} border="primary">
-                  {/* {job.company ? (
-                  <Card.Img
-                    src={job.company}
-                    alt={`The cover for ${job.name}`}
-                    variant="top"
-                  />
-                ) : null} */}
                   <Card.Body>
                     <Card.Title>{job.company}</Card.Title>
                     <p className="small">Title: {job.name}</p>
@@ -206,8 +199,8 @@ const SearchJobs = () => {
                           {savedJobIds?.some(
                             (savedJobId) => savedJobId === job.jobId
                           )
-                            ? 'This job has already been saved!'
-                            : 'Save this Job!'}
+                            ? "This job has already been saved!"
+                            : "Save this Job!"}
                         </Button>
                       )}
                     </Grid>
