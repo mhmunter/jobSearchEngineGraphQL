@@ -27,7 +27,7 @@ export const ADD_USER = gql`
 // returning only id, fix it if nesserary
 export const SAVE_JOB = gql`
   mutation saveJob($name: String, $company: String!, $level: String!, $location: String!, $link: String, $category: String) {
-    saveJob(name: $name, company: $company, level: $level, location: $location, link: $link, catagory: $category) {
+    saveJob(name: $name, company: $company, level: $level, location: $location, link: $link, category: $category) {
       _id
     
     }

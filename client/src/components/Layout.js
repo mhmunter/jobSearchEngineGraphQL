@@ -1,28 +1,31 @@
 import React, { useState } from 'react';
-import { Link } from "react-router-dom";
-// import { Navbar, Nav, Container} from "react-bootstrap";
+import { Link } from 'react-router-dom';
 import SignUpForm from './SignupForm';
 import LoginForm from './LoginForm';
+import Auth from '../utils/auth';
+import SavedJobs from '../pages/SavedJobs';
 import { styled, useTheme } from '@mui/material/styles';
-import Box from '@mui/material/Box';
-import Drawer from '@mui/material/Drawer';
+import {
+  Box,
+  Drawer,
+  Toolbar,
+  CssBaseline,
+  List,
+  Typography,
+  Divider,
+  IconButton,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  Modal,
+} from '@mui/material';
 import MuiAppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import CssBaseline from '@mui/material/CssBaseline';
-import List from '@mui/material/List';
-import Typography from '@mui/material/Typography';
-import Divider from '@mui/material/Divider';
-import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
-import Modal from '@mui/material/Modal'
 import { makeStyles, Tab } from '@material-ui/core';
 
 const useStyles = makeStyles({
@@ -155,36 +158,30 @@ export default function Layout({ children }) {
         </DrawerHeader>
         <Divider />
         <List>
-          {[{name:'Search For Jobs', link: '/'}, {name:'Login', link: '/login'}, {name:'Signup', link: '/signup'}].map((text, index) => (
-            <Link to= {text.link}>
-            <ListItem
-              key={text.name}
-              disablePadding
-              onClick={() => setShowModal(true)}
-            >
-              <ListItemButton>
-                <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText primary={text.name} />
-              </ListItemButton>
-            </ListItem>
+          {[
+            { name: 'Search For Jobs', link: '/' },
+            { name: 'Signup', link: '/signup' },
+            { name: 'Login', link: '/login' },
+            { name: 'Logout', link: '/#' },
+            { name: 'Saved Jobs', link: '/saved' },
+          ].map((text, index) => (
+            <Link to={text.link}>
+              <ListItem
+                key={text.name}
+                disablePadding
+                onClick={() => setShowModal(true)}
+              >
+                <ListItemButton>
+                  <ListItemIcon>
+                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                  </ListItemIcon>
+                  <ListItemText primary={text.name} />
+                </ListItemButton>
+              </ListItem>
             </Link>
           ))}
         </List>
         <Divider />
-        <List>
-          {['Saved Jobs', 'Contact Us'].map((text, index) => (
-            <ListItem key={text} disablePadding>
-              <ListItemButton>
-                <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItemButton>
-            </ListItem>
-          ))}
-        </List>
         <Modal
           size="lg"
           show={showModal}
@@ -196,21 +193,33 @@ export default function Layout({ children }) {
               <Modal.Title id="signup-modal">
                 <List variant="pills">
                   <ListItem>
-                    <Link to= '/login'>Login</Link>
+                    <Link to="/login">Login</Link>
                   </ListItem>
                   <ListItem>
                     <Link eventKey="signup">Sign Up</Link>
+                  </ListItem>
+                  <ListItem>
+                    <Link to="/#">Logout</Link>
+                  </ListItem>
+                  <ListItem>
+                    <Link to="/saved">Saved Jobs</Link>
                   </ListItem>
                 </List>
               </Modal.Title>
             </Modal.Header>
             <Modal.Body>
               <Tab.Content>
+                <Tab.Pane eventKey="signup">
+                  <SignUpForm handleModalClose={() => setShowModal(false)} />
+                </Tab.Pane>
                 <Tab.Pane eventKey="login">
                   <LoginForm handleModalClose={() => setShowModal(false)} />
                 </Tab.Pane>
-                <Tab.Pane eventKey="signup">
-                  <SignUpForm handleModalClose={() => setShowModal(false)} />
+                {/* <Tab.Pane eventKey="logout">
+                  <Auth handleModalClose={() => setShowModal(false)} />
+                </Tab.Pane> */}
+                <Tab.Pane eventKey="saved">
+                  <SavedJobs handleModalClose={() => setShowModal(false)} />
                 </Tab.Pane>
               </Tab.Content>
             </Modal.Body>
@@ -220,41 +229,3 @@ export default function Layout({ children }) {
     </Box>
   );
 }
-// const drawerWidth = 240;
-
-// const useStyles = makeStyles({
-//   page: {
-//     background: '#f9f9f9',
-//     width: '100%',
-//   },
-//   drawer: {
-//     width: drawerWidth,
-//   },
-//   drawerPaper: {
-//     width: drawerWidth,
-//   },
-//   root: {
-//     display: 'flex'
-//   }
-// });
-
-// export default function Layout({ children }) {
-//   const classes = useStyles();
-//   return (
-// <div className={classes.root}>
-//   <Drawer
-//     className={classes.drawer}
-//     variant="permanent"
-//     anchor="right"
-//     classes={{ paper: classes.drawerPaper }}
-//   >
-//     <div>
-//       <Typography variant="h5">Testing</Typography>
-//     </div>
-//   </Drawer>
-//   <div>
-//     <div className={classes.page}>{children}</div>
-//   </div>
-// </div>
-//   );
-// }
