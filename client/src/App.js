@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import SearchJobs from './pages/SearchJobs';
 import SavedJobs from './pages/SavedJobs';
-import Navbar from './components/Navbar';
+// import Navbar from './components/Navbar';
 import {
   ApolloProvider,
   ApolloClient,
@@ -115,12 +115,12 @@ function App() {
         <Router>
           <Layout>
             <>
-              <Navbar />
+              {/* <Navbar /> */}
               <Switch>
                 <Route exact path="/" component={SearchJobs} />
                 <Route exact path='/login' component={LoginForm}/>
                 <Route exact path='/signup' component={SignupForm}/>
-                <Route exact path='/logout' component={Auth}/>
+                {/* <Route exact path='/logout' component={Auth}/> */}
                 <Route exact path="/saved" component={SavedJobs} />
                 <Route
                   render={() => <h1 className="display-2">Wrong page!</h1>}

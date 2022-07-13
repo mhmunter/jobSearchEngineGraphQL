@@ -1,13 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {
-  Jumbotron,
-  // Container,
-  // Col,
-  // Form,
-  // Button,
-  Card,
-  CardColumns,
-} from 'react-bootstrap';
+import { Jumbotron, Card, CardColumns } from 'react-bootstrap';
 import {
   Container,
   Grid,
@@ -16,29 +8,37 @@ import {
   Button,
   makeStyles,
 } from '@material-ui/core';
-// import { makeStyles } from '@material-ui/core'
 
-import Auth from "../utils/auth";
+import Auth from '../utils/auth';
 
 // import { saveJobIds, getSavedJobIds } from "../utils/localStorage";
 import { Link } from 'react-router-dom';
 import { SAVE_JOB } from '../utils/mutations';
-import { useMutation } from "@apollo/client";
+import { useMutation } from '@apollo/client';
 
 import { saveJob, searchApiJobs } from '../utils/API';
 import { saveJobIds, getSavedJobIds } from '../utils/localStorage';
 
 const useStyles = makeStyles({
   btn: {
+    padding: 26.5,
     fontSize: 20,
-    '&:hover': {
-      background: 'linear-gradient(45deg, #ff5722 30%, #010e5c 90%)',
-    },
+    // '&:hover': {
+    //   background: 'linear-gradient(45deg, #ff5722 30%, #010e5c 90%)',
+    // },
   },
   searchField: {
     marginTop: 20,
     marginBottom: 20,
     display: 'block',
+  },
+  savedBtn: {
+    padding: 26.5,
+    background: '#010e5c',
+    '&:hover': {
+      background: '#ff5722',
+      color: '#010e5c',
+    },
   },
 });
 
@@ -51,7 +51,6 @@ const SearchJobs = () => {
   // create state to hold saved jobId values
   const [savedJobIds, setSavedJobIds] = useState(getSavedJobIds());
   const [saveJob] = useMutation(SAVE_JOB);
-
 
   // set up useEffect hook to save `savedJobIds` list to localStorage on component unmount
   // learn more here: https://reactjs.org/docs/hooks-effect.html#effects-with-cleanup
@@ -104,11 +103,18 @@ const SearchJobs = () => {
     if (!token) {
       return false;
     }
-console.log(jobToSave)
+    console.log(jobToSave);
     try {
-      const {data} = await saveJob({
-        variables: {name: jobToSave.name, company: jobToSave.company, level: jobToSave.level, location: jobToSave.location, link: jobToSave.link, category: jobToSave.catagory}
-      })
+      const { data } = await saveJob({
+        variables: {
+          name: jobToSave.name,
+          company: jobToSave.company,
+          level: jobToSave.level,
+          location: jobToSave.location,
+          link: jobToSave.link,
+          category: jobToSave.catagory,
+        },
+      });
       console.log(data);
       // const response = await saveJob(jobToSave, token);
 
@@ -159,10 +165,6 @@ console.log(jobToSave)
         </Jumbotron>
 
         <Container>
-          <Typography variant="h1" color="secondary">
-            {' '}
-            TESTING{' '}
-          </Typography>
           <h2>
             {searchedJobs.length
               ? `Viewing ${searchedJobs.length} results:`
@@ -189,22 +191,26 @@ console.log(jobToSave)
                         Job Link
                       </Link>
                     </Card.Text>
-
-                    {Auth.loggedIn() && (
-                      <Button
-                        disabled={savedJobIds?.some(
-                          (savedJobId) => savedJobId === job.jobId
-                        )}
-                        className="btn-block btn-info"
-                        onClick={() => handleSaveJob(job.jobId)}
-                      >
-                        {savedJobIds?.some(
-                          (savedJobId) => savedJobId === job.jobId
-                        )
-                          ? 'This job has already been saved!'
-                          : 'Save this Job!'}
-                      </Button>
-                    )}
+                    <Grid item xs={12} md={6}>
+                      {Auth.loggedIn() && (
+                        <Button
+                          className={classes.savedBtn}
+                          variant="contained"
+                          color="primary"
+                          disabled={savedJobIds?.some(
+                            (savedJobId) => savedJobId === job.jobId
+                          )}
+                          // className="btn-block btn-info"
+                          onClick={() => handleSaveJob(job.jobId)}
+                        >
+                          {savedJobIds?.some(
+                            (savedJobId) => savedJobId === job.jobId
+                          )
+                            ? 'This job has already been saved!'
+                            : 'Save this Job!'}
+                        </Button>
+                      )}
+                    </Grid>
                   </Card.Body>
                 </Card>
               );
