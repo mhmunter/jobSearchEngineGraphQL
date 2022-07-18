@@ -39,7 +39,7 @@ Here is a screenshot of the application
 
   ### Instructions
 
-    The user can login to the website, search for a job posting, view up to 20 job listings and click on the link to the job site.
+    The user can login to the website, search for a job posting, view up to 20 job listings and click on the link to the job site. Must use capital letter for first letter of each word. 
 
   ### Licenses 
   Apache2.0
