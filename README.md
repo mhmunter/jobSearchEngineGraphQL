@@ -24,7 +24,7 @@ Here is a screenshot of the application
 [![image](./client/public/fateScreenshot.png)]
 
   ### Install
-  Download this repo, run npm init, npm i, and then run on your local server using React. Run npm run develop from the root of the folder. This server runs on localhost:3000
+  Download this repo, run npm init, npm i, and then run on your local server using React. Run npm run develop from the root of the folder. Must use CAPITAL leters.     This server runs on localhost:3000
 
   ### Usage
   View the deployed site using the link below:
